@@ -1,38 +1,29 @@
 import requests
 from datetime import datetime
 
-# List of websites to check
-WEBSITES = [
-    "https://httpbin.org/get",
-    "https://jsonplaceholder.typicode.com/todos/1",
-    "https://api.github.com"
+websites = [
+    "https://google.com"
 ]
 
-RETRIES = 3  # Number of retries per site
+retries = 3
 
-def check_website(url):
-    for attempt in range(1, RETRIES + 1):
+def healthCheck(url):
+    for attempt in range (1, retries + 1):
         try:
             start = datetime.now()
-            response = requests.get(url, timeout=5)
+            response = requests.get(url, timeout=2)
             end = datetime.now()
-            response_time = round((end - start).total_seconds() * 1000, 2)  # in ms
+            response_time = round((end-start).total_seconds() * 1000, 2)
 
             if response.status_code == 200:
-                print(f"{end} | ✅ UP | {url} | {response_time} ms")
+                print (f"{end} | {url} is UP with response time {response_time}")
                 return True
             else:
-                print(f"{end} | ⚠️ WARNING | {url} returned {response.status_code}")
+                print (f"{end} | Warning for {url} the status is {response.status_code}")
         except requests.exceptions.RequestException as e:
-            print(f"{datetime.now()} | ❌ DOWN | {url} | Attempt {attempt} failed: {e}")
-
-    print(f"{datetime.now()} | 🚨 {url} is unreachable after {RETRIES} attempts")
+            print (f"{datetime.now()} | Received exception for {url} exception - {e}")
+    print (f"{datetime.now()} | {url} is unreachable, Attempt no. {attempt}")
     return False
 
-print("=== Website Health Check Started ===")
-
-# Single quick pass for online compiler
-for site in WEBSITES:
-    check_website(site)
-
-print("=== Health Check Completed ===")
+for site in websites:
+    healthCheck(site)
