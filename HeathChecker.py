@@ -1,29 +1,43 @@
-import requests
 from datetime import datetime
-
-websites = [
-    "https://google.com"
-]
+import requests
+import time
 
 retries = 3
+time_out = 5
+retry_delay = 2
 
-def healthCheck(url):
-    for attempt in range (1, retries + 1):
+websites = [
+    "https://google.com",
+    "https://github.com"
+]
+
+def health_checker(url):
+    for attempt in range(1, retries +1):
         try:
             start = datetime.now()
-            response = requests.get(url, timeout=2)
+            response = requests.get(url, timeout= time_out)
             end = datetime.now()
-            response_time = round((end-start).total_seconds() * 1000, 2)
+            response_time = round((end - start).total_seconds() * 1000, 2)
+            size_kb = round(len(response.content) / 1024, 2)
 
             if response.status_code == 200:
-                print (f"{end} | {url} is UP with response time {response_time}")
+                print(f"{end} | {url} is UP | Response time is {response_time} | size is {size_kb} kb")
                 return True
             else:
-                print (f"{end} | Warning for {url} the status is {response.status_code}")
+                print (f"{end} | Warning for {url} | Status is {response.status_code}")
+            
         except requests.exceptions.RequestException as e:
-            print (f"{datetime.now()} | Received exception for {url} exception - {e}")
-    print (f"{datetime.now()} | {url} is unreachable, Attempt no. {attempt}")
+            print (f"{datetime.now()} | {url} is unreachable | Attempt no {attempt} | Exception {e}")
+        
+        time.sleep(retry_delay)
+    print (f"{datetime.now()} | {url} is DOWN | All attempts are failed.")
     return False
 
+results = {}
+
 for site in websites:
-    healthCheck(site)
+    results[site] = health_checker(site)
+
+print("Summary")
+for site, status in results.items():
+    print(f"{site} : Status is {'UP' if status else 'DOWN'}")
