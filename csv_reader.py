@@ -1,6 +1,10 @@
 import csv
+import os
 
-path = "C:/Users/VARSHINI/Projects/Phython/data.csv"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+csv_file = os.path.join(BASE_DIR, "data.csv")
+
+#path = "C:/Users/VARSHINI/Projects/Phython/data.csv"
 
 def csv_reader(file_path):
     try:
@@ -31,4 +35,4 @@ def csv_reader(file_path):
         return {}, 0
     
 if __name__ == "__main__":
-    csv_reader(path)
+    csv_reader(csv_file)
