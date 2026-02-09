@@ -27,8 +27,9 @@ jobs:
       - name: Run math_utils tests only
         run: |
           pytest Math_Utils/test_math_utils.py
-  Run:
+  Run-math-utils:
     runs-on: ubuntu-latest
+    needs: test
 
     steps:
       - name: Run math_utils file
