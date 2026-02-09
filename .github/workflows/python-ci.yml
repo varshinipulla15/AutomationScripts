@@ -27,14 +27,12 @@ jobs:
       - name: Run math_utils tests only
         run: |
           pytest Math_Utils/test_math_utils.py
-  Run-math-utils:
+  run_math_utils:
     runs-on: ubuntu-latest
     needs: test
-
     steps:
-      - name: Show repo contents
-        run: |
-          ls -R
-      - name: Run math_utils file
-        run: |
-          python Math_Utils/math_utils.py
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python Math_Utils/math_utils.py
