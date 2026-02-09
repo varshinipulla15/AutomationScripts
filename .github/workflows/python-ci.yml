@@ -32,7 +32,9 @@ jobs:
     needs: test
 
     steps:
+      - name: Show repo contents
+        run: |
+          ls -R
       - name: Run math_utils file
         run: |
-          cd Math_Utils
-          python math_utils.py
+          python Math_Utils/math_utils.py
