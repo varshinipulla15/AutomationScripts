@@ -1,4 +1,4 @@
-name: Python CI (math_utils only)
+name: Python CI (for math_utils only)
 
 on:
   push:
