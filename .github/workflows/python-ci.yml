@@ -27,3 +27,7 @@ jobs:
       - name: Run math_utils tests only
         run: |
           pytest Math_Utils/test_math_utils.py
+
+      - name: Run math_utils file
+        run: |
+          python Math_Utils/math_utils.py
