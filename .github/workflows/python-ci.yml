@@ -22,8 +22,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r Math_utils/requirements.txt
+          pip install -r Math_Utils/requirements.txt
 
       - name: Run math_utils tests only
         run: |
-          pytest Math_utils/test_math_utils.py
+          pytest Math_Utils/test_math_utils.py
