@@ -3,8 +3,12 @@ name: Python CI (for math_utils only)
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - "Math_Utils/**"
   pull_request:
     branches: [ "main" ]
+    paths:
+      - "Math_Utils/**"
 
 jobs:
   test:
