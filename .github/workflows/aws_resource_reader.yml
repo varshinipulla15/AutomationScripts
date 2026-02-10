@@ -30,4 +30,4 @@ jobs:
           pip install -r aws_resources/requirements.txt
 
       - name: Run aws_resource_reader
-        run: python awsresource_reader.py
+        run: python aws_resources/awsresource_reader.py
