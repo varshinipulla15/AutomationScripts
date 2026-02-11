@@ -1,4 +1,4 @@
-#create a pipeline 
+#create a pipeline to this script
 import requests
 from datetime import datetime
 
