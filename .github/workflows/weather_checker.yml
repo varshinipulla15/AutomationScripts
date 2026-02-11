@@ -25,6 +25,7 @@ jobs:
    steps:
       - uses: actions/checkout@v4
       - run: docker build -t weather_script ./Weather
+      - run: docker run --rm weather_script
 
 
 
