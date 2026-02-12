@@ -7,7 +7,7 @@ def collect_metrics():
         "timestamp" : str(datetime.now()),
         "cpu_percentage" : psutil.cpu_percent(interval=1),
         "memory_percentage" : psutil.virtual_memory().percent,
-        "disk_percentage" : psutil.disk_usage("c:\\").percent
+        "disk_percentage" : psutil.disk_usage("/").percent
     }
     return metrics
 
